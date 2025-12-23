@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKTU RESULT</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  width:100vw;
+  background:url("a.png") no-repeat center center;
+  background-size:cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  background:#fff;
+  width:90%;
+  max-width:400px;
+  padding:30px 25px;
+  border-radius:15px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+  text-align:center;
+}
+
+/* 🔽 download button */
+.download-btn{
+  display:none;
+  margin-bottom:15px;
+  padding:10px;
+  background:#16a34a;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  font-size:15px;
+}
+
+.download-btn:hover{
+  background:#15803d;
+}
+
+h2{
+  margin-bottom:20px;
+  color:rgb(167,0,0);
+}
+
+.container input{
+  width:100%;
+  padding:12px;
+  margin-bottom:20px;
+  border:1.5px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+.container button{
+  width:100%;
+  padding:12px;
+  background:#4f46e5;
+  color:white;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#dob, button{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- 🔽 hidden initially -->
+  <a href="a.pdf" download class="download-btn" id="downloadBtn">
+    ⬇ Download Result (PDF)
+  </a>
+
+  <h2>AKTU OneView</h2>
+
+  <form id="studentForm">
+    <input type="number" id="rollNumber" placeholder="Enter Roll Number" required>
+    <input type="date" id="dob" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <pre>this is official ERP of
+AKTU University</pre>
+</div>
+
+<script>
+const rollInput = document.getElementById("rollNumber");
+const dobInput = document.getElementById("dob");
+const submitBtn = document.querySelector("button");
+const downloadBtn = document.getElementById("downloadBtn");
+
+rollInput.addEventListener("keypress", e=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    if(rollInput.value.trim()!==""){
+      rollInput.disabled=true;
+      dobInput.style.display="block";
+      dobInput.focus();
+    }
+  }
+});
+
+dobInput.addEventListener("change",()=>{
+  if(dobInput.value){
+    submitBtn.style.display="block";
+  }
+});
+
+document.getElementById("studentForm").addEventListener("submit",e=>{
+  e.preventDefault();
+
+  const roll = rollInput.value.trim();
+  const dob = dobInput.value;
+  const formattedDate = new Date(dob).toLocaleDateString('en-GB');
+
+  if(roll==="2401640100843" && formattedDate==="01/07/2006"){
+    window.open("a.pdf","_self");
+
+    // ✅ show download button AFTER success
+    downloadBtn.style.display="block";
+  } else {
+    alert("Invalid roll number or date of birth");
+  }
+});
+</script>
+</body>
+</html>
