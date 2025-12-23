@@ -131,8 +131,6 @@ document.getElementById("studentForm").addEventListener("submit",e=>{
   const formattedDate = new Date(dob).toLocaleDateString('en-GB');
 
   if(roll==="2401640100843" && formattedDate==="01/07/2006"){
-    window.open("a.pdf","_self");
-
     // ✅ show download button AFTER success
     downloadBtn.style.display="block";
   } else {
@@ -142,3 +140,4 @@ document.getElementById("studentForm").addEventListener("submit",e=>{
 </script>
 </body>
 </html>
+
